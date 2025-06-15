@@ -32,7 +32,7 @@ Authored by: Giannis Daras*, Adrian Rodriguez-Munoz*, Adam Klivans, Antonio Torr
 ## Results
 
 
-![Generated Images](figs/gens_transparent.png)
+![Generated Images](figs/generations.png)
 
 Our model increases the quality of the generations without any changes in the architecture, training/sampling hyperparameters or the optimization algorithm. The benefit comes solely from using cleverly the available data.
 
