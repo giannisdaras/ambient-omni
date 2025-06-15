@@ -125,12 +125,10 @@ How about the low-noise regime of the diffusion training? As we show in the pape
 
 One nice consequence of the fact that the diffusion model only looks at crops for low noise is that we can leverage crops from out-of-distribution images, as long as locally they look like they are coming from the distribution of interest.
 
-For example, we can use crops of cats to make a generative model for dogs! Below we show the "dogness" probability for different patches for two different cats.
+For example, we can use crops of cats to make a generative model for dogs! Below we show the "dogness" probability for different patches for a cat image.
 
 
 ![](figs/dogness_of_cat_1.jpg)
-
-![](figs/dogness_of_cat_2.jpg)
 
 As shown, some of the crops from these cats are useful for learning dog features in the low-noise regime of the diffusion.
 
