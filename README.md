@@ -6,7 +6,7 @@
 
 
 <div align="center">
-  <img src="figs/ambient_logo.png" width="60%" alt="Open Thoughts GitHub Repository" />
+  <img src="figs/ambient_logo.png" width="60%" alt="Ambient Omni Logo" />
 </div>
 
 
@@ -130,7 +130,7 @@ For example, we can use crops of cats to make a generative model for dogs! Below
 
 ![](figs/dogness_of_cat_1.jpg)
 
-As shown, some of the crops from these cats are useful for learning dog features in the low-noise regime of the diffusion.
+As shown, some of the crops from this cat are useful for learning dog features in the low-noise regime of the diffusion.
 
 
 
