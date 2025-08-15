@@ -16,3 +16,8 @@ pixel-diffusion/slurm_logs/
 pixel-diffusion/ambient-syn-evals
 pixel-diffusion/ambient-syn-runs
 data_softlink
+
+# edm2
+edm2/scratch
+edm2/scratch_release
+edm2/slurm
