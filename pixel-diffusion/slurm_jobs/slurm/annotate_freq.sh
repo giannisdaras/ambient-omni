@@ -1,0 +1,13 @@
+slurmify submit-parametric-array \
+  --account CGAI24022 \
+  --job-name annotate_cifar_blurs_freq \
+  --script-path slurm_jobs/annotate_freq.py \
+  --time-limit 01:00:00 \
+  --parameter "dataset:cifar" \
+  --parameter "dataset_path:/scratch/07362/gdaras/datasets/cifar10-32x32.zip" \
+  --parameter "inference_noise_config:blurs1,blurs0_8,blurs0_6,blurs0_4" \
+  --parameter "corruption_probability:0.9" \
+  --partition "gh" \
+  --nodes=2 \
+  --check_worthiness=False \
+  --max-resubmissions=0

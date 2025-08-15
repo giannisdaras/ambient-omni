@@ -1,0 +1,15 @@
+slurmify submit-parametric-array \
+  --account CGAI24022 \
+  --job-name eval_cifar \
+  --script-path slurm_jobs/eval_net.py \
+  --time-limit 00:15:00 \
+  --parameter "dataset:cifar" \
+  --parameter "noise_config:blurs" \
+  --parameter "dataset_path:/scratch/07362/gdaras/datasets/cifar-fixed-sigma-0.2-0.0-blurs0_4-0.9/,/scratch/07362/gdaras/datasets/cifar-fixed-sigma-0.4-0.0-blurs0_4-0.9/,/scratch/07362/gdaras/datasets/cifar-fixed-sigma-0.6-0.0-blurs0_4-0.9/,/scratch/07362/gdaras/datasets/cifar-fixed-sigma-0.8-0.0-blurs0_4-0.9/" \
+  --parameter "rerun:False" \
+  --parameter "dp:1.0" \
+  --partition "gh" \
+  --nodes=8 \
+  --check_worthiness=False \
+  --max-resubmissions=0 \
+  --parameter "checkpoint_index:22500,25000,27500,30000"

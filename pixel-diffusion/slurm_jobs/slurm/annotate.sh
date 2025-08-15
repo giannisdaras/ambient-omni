@@ -1,0 +1,15 @@
+slurmify submit-parametric-array \
+  --account CGAI24022 \
+  --job-name annotate_motionblur2 \
+  --script-path slurm_jobs/annotate_cls.py \
+  --time-limit 02:00:00 \
+  --parameter "dataset:cifar" \
+  --parameter "dataset_path:/scratch/07362/gdaras/datasets/cifar10-32x32.zip" \
+  --parameter "corruption_probability:0.9" \
+  --parameter "training_noise_config:motionblur2" \
+  --parameter "inference_noise_config:motionblur2" \
+  --parameter "checkpoint_path:/scratch/07362/gdaras/ambient-syn-runs/versions/v25/00010-cifar10-32x32-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-24F9x/network-snapshot-005018.pkl,/scratch/07362/gdaras/ambient-syn-runs/versions/v25/00010-cifar10-32x32-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-24F9x/network-snapshot-040141.pkl,/scratch/07362/gdaras/ambient-syn-runs/versions/v25/00010-cifar10-32x32-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-24F9x/network-snapshot-015053.pkl" \
+  --partition "gh" \
+  --nodes=32 \
+  --check_worthiness=False \
+  --max-resubmissions=0

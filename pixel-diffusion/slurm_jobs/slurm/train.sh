@@ -1,0 +1,13 @@
+slurmify submit-parametric-array \
+  --account CGAI24022 \
+  --job-name train_afhq \
+  --script-path slurm_jobs/train_net.py \
+  --time-limit 12:00:00 \
+  --parameter "dataset_path:/scratch/07362/gdaras/datasets/afhqv2-64x64.zip" \
+  --parameter "dp:0.1" \
+  --parameter "corruption_probability:0.0" \
+  --parameter "keep_schedule:True" \
+  --partition "gh" \
+  --nodes=16 \
+  --check_worthiness=False \
+  --max-resubmissions=0

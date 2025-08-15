@@ -1,0 +1,15 @@
+slurmify submit-parametric-array \
+  --account CGAI24022 \
+  --job-name train_cls_afhq \
+  --script-path slurm_jobs/train_cls.py \
+  --time-limit 12:00:00 \
+  --parameter "dataset:afhq" \
+  --parameter "dataset_path:/scratch/07362/gdaras/datasets/afhqv2-64x64.zip" \
+  --parameter "noise_config:blurs1,blurs0_8,blurs0_6,blurs0_4" \
+  --parameter "corruption_probability:0.5" \
+  --parameter "all_pairs:False" \
+  --parameter "dp:1.0" \
+  --partition "gh" \
+  --nodes=8 \
+  --check_worthiness=False \
+  --max-resubmissions=0

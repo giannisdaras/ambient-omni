@@ -1,0 +1,16 @@
+slurmify submit-parametric-array \
+  --account CGAI24022 \
+  --job-name annotate \
+  --script-path slurm_jobs/annotate_fixed_sigma.py \
+  --time-limit 01:00:00 \
+   --parameter "dataset:afhq" \
+  --parameter "dataset_path:/scratch/07362/gdaras/datasets/afhqv2-64x64.zip" \
+  --parameter "inference_noise_config:identity" \
+  --parameter "corruption_probability:0.9" \
+  --parameter "min_fixed_sigma:0.0" \
+  --parameter "max_fixed_sigma:0.0" \
+  --parameter "save_only_clean:True" \
+  --partition "gg" \
+  --nodes=32 \
+  --check_worthiness=False \
+  --max-resubmissions=0
