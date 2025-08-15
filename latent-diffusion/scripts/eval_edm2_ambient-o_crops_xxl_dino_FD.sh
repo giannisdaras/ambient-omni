@@ -1,5 +1,5 @@
 # Args
-experiment_dir=./scratch_release/outputs/ambient-syn-edm2-runs/edm2-img512-xxl-ambient-o/bad_data_percentage-0.8-bad-data-sigma-min-0.2-use-ambient-crops-True
+experiment_dir=outputs/ambient-syn-edm2-runs/edm2-img512-xxl-ambient-o/bad_data_percentage-0.8-bad-data-sigma-min-0.2-use-ambient-crops-True
 
 ## Ema
 ema_std=0.015
@@ -15,7 +15,7 @@ seed_max=99999
 
 # Evaluation dir
 experiment_name=${experiment_dir##*/ambient-syn-edm2-runs/}
-outdir=./scratch_release/outputs/ambient-syn-edm2-evals/$experiment_name
+outdir=outputs/ambient-syn-edm2-evals/$experiment_name
 
 # # Compute phema
 # ema_dir=${experiment_dir}-ema-${ema_std}

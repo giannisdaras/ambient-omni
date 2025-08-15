@@ -5,16 +5,16 @@ set -e # Exit on any error
 
 # EDM2 config
 model_name="edm2-img512-xxl"
-dataset_path="./scratch_release/datasets/img512-sd.zip"
+dataset_path="datasets/img512-sd.zip"
 
 # Ambient config
-annotations_qualities_path="./scratch_release/annotations/clip_iqa_patch_average.pkl"
+annotations_qualities_path="annotations/clip_iqa_patch_average.pkl"
 bad_data_percentage=0.9
 bad_data_sigma_min=0.2
 use_ambient_crops=False
 
 # Outdir / id
-outdir=./scratch_release/outputs/ambient-syn-edm2-runs/${model_name}-ambient-o/bad_data_percentage-${bad_data_percentage}-bad-data-sigma-min-${bad_data_sigma_min}-use-ambient-crops-${use_ambient_crops}
+outdir=outputs/ambient-syn-edm2-runs/${model_name}-ambient-o/bad_data_percentage-${bad_data_percentage}-bad-data-sigma-min-${bad_data_sigma_min}-use-ambient-crops-${use_ambient_crops}
 expr_id=${model_name}-ambient-o-bad_data_percentage-${bad_data_percentage}-bad-data-sigma-min-${bad_data_sigma_min}-use-ambient-crops-${use_ambient_crops}
 
 # Create output directory if it doesn't exist

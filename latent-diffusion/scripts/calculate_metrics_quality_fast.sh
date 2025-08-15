@@ -1,5 +1,5 @@
-data=./scratch_release/datasets/img512.zip
-dest=./scratch_release/annotations/clip_iqa_patch_average_fast
+data=datasets/img512.zip
+dest=annotations/clip_iqa_patch_average_fast
 
 # Calculate quality
 mkdir -p "$(dirname "$dest")"
