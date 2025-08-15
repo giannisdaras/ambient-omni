@@ -26,7 +26,7 @@ We provide scripts for evaluating our strongest model, published on huggingface,
 
 # 🔗 Related Codebases
 
-* [EDM](https://github.com/NVlabs/edm2): starting point for this repository.
+* [EDM2](https://github.com/NVlabs/edm2): starting point for this repository.
 * [Ambient Laws](https://github.com/giannisdaras/ambient-laws): trains models with a mix of clean and noisy data.
 * [Ambient Diffusion](https://github.com/giannisdaras/ambient-diffusion): trains models for linear corruptions.
 * [Consistent Diffusion Meets Tweedie](https://github.com/giannisdaras/ambient-tweedie): trains models with only noisy data, with support for Stable Diffusion finetuning.
