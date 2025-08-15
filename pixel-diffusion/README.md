@@ -17,9 +17,9 @@ To do this, there are four steps you must follow:
 <li><a href="#1d-evaluate-the-generative-model">Evaluate the generative model</a></li>
 </ol>
 
-### 1.a Train a noise classifier to distinguish noisy clean images from noisy corrupted images
+### 1.a [Optional] Train a noise classifier to distinguish noisy clean images from noisy corrupted images
 
-This can be done using the scripts in `scripts/train_noise_classifier`, with an example shown below for blurring corruptions with $\sigma_B=0.4$. Note that you will have to replace the `dataset_path` to cifar10 with your own
+Training a classifier is the most principled way of using our method, and leads to the best results. However, this is optional as using a fixed hyper-parameter annotation will also yield good results. If you want to skip this step, go ahead to [1.b](), otherwise keep reading. Training a classifier can be done using the scripts in `scripts/train_noise_classifier`, with an example shown below for blurring corruptions with $\sigma_B=0.4$. Note that you will have to replace the `dataset_path` to cifar10 with your own
 ```
 # train_blur0-4_prob0-5.sh
 #!/bin/bash
