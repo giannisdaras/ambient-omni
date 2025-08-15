@@ -25,6 +25,8 @@ import json
 from collections import defaultdict
 import zipfile
 from calculate_metrics_quality import load_stats
+from huggingface_hub import hf_hub_download
+from safetensors import safe_open
 #----------------------------------------------------------------------------
 # Uncertainty-based loss function (Equations 14,15,16,21) proposed in the
 # paper "Analyzing and Improving the Training Dynamics of Diffusion Models".
@@ -122,7 +124,14 @@ def training_loop(
     ## Annotations
     annotations = {}
     if annotations_qualities_path is not None:
-        annotations_qualities = load_stats(annotations_qualities_path)
+        if annotations_qualities_path == "adrianrm/ambient-o-clip-iqa-patches-imagenet":
+            annotations_qualities_path = hf_hub_download(repo_id='adrianrm/ambient-o-clip-iqa-patches-imagenet', filename="clip_iqa_patch_average.safetensors", repo_type="dataset")
+            annotations_qualities = {}
+            with safe_open(annotations_qualities_path, framework="pt", device='cpu') as f:
+                for k in f.keys():
+                    annotations_qualities[k] = f.get_tensor(k)
+        else:
+            annotations_qualities = load_stats(annotations_qualities_path)
 
         ### Sigma min
         global_qualities = annotations_qualities['CLIP-IQA'][:, 0]
