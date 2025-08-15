@@ -2,7 +2,7 @@
 #!/bin/bash
 PYTHONPATH=.
 outdir=./outputs # Replace with your own
-dataset_path=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/data_softlink/cifar10/train # Replace with your own
+dataset_path=./data/cifar10/train # Replace with your own
 noise_config=blur0-4
 corruption_probability=0.5
 precond=edmcls

@@ -1,6 +1,6 @@
 #!/bin/bash
 PYTHONPATH=.
-dataset_path=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/data_softlink/cifar10/train # Replace with your own; path to clean cifar10
+dataset_path=./data/cifar10/train # Replace with your own; path to clean cifar10
 # Replace with your own
 ckpt_dir=noise_classifier/blur0-4_prob0-5/00004-train-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-V5gDx/network-snapshot-015053/s-max-4/00000-network-snapshot-015053-uncond-ddpmpp-edm-gpus8-batch512-fp32-DusSj
 dp=1.0

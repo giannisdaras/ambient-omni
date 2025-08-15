@@ -1,6 +1,6 @@
 #!/bin/bash
 PYTHONPATH=.
-dogs_dataset_path=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/scratch_ambient/ambient/datasets/afhqv2-64x64-partitioned/1
+dogs_dataset_path=./data/afhqv2-64x64-partitioned/1
 ckpt_dir=cats-100_and_dogs-100/network-snapshot-020070/s-max-4/00009-network-snapshot-020070-uncond-ddpmpp-edm-gpus8-batch512-fp32-FtdC1
 dp=1.0
 weight_decay=0.0
