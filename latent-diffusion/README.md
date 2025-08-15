@@ -3,8 +3,8 @@
 
 This part of the repo focuses on large-scale latent diffusion experiments with [EDM2](https://github.com/NVlabs/edm2) using ImageNet. Here, we show how just by using the data better, you can improve the performance and quality of your generative models. Everything else, including data, model size, and training FLOPs, stays the exact same. The key idea is to change the diffusion times we use for our images depending on quality: high-quality data is used for all times, while low-quality data is used only for times above a certain threshold.
 
-Three things are required:
-1. Prepare your data in the EMD2 format
+You can find our best model from the paper on [huggingface](https://huggingface.co/giannisdaras/ambient-o-imagenet512-xxl-with-crops), and if you want to train your own, only three things are required:
+1. Prepare your ImageNet data in the EMD2 format
 2. Calculate the quality of your data. In this repo, we use CLIP-IQA, but any metric could work.
 3. Train your generative model using the ambient-o algorithm.
 
