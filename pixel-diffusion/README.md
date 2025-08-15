@@ -19,7 +19,7 @@ To do this, there are four steps you must follow:
 
 ### 1.a [Optional] Train a noise classifier to distinguish noisy clean images from noisy corrupted images
 
-Training a classifier is the most principled way of using our method, and leads to the best results. However, this is optional as using a fixed hyper-parameter annotation will also yield good results. If you want to skip this step, go ahead to [1.b](), otherwise keep reading. Training a classifier can be done using the scripts in `scripts/train_noise_classifier`, with an example shown below for blurring corruptions with $\sigma_B=0.4$. Note that you will have to replace the `dataset_path` to cifar10 with your own
+Training a classifier is the most principled way of using our method, and leads to the best results. However, this is optional as using a fixed hyper-parameter annotation will also yield good results. If you want to skip this step, go ahead to [1.b](https://github.com/giannisdaras/ambient-omni/blob/main/pixel-diffusion/README.md#1b-annotate-a-mostly-corrupted-dataset-with-minimum-noise-levels-sigma_tn), otherwise keep reading. Training a classifier can be done using the scripts in `scripts/train_noise_classifier`, with an example shown below for blurring corruptions with $\sigma_B=0.4$. Note that you will have to replace the `dataset_path` to cifar10 with your own
 ```
 # train_blur0-4_prob0-5.sh
 #!/bin/bash
@@ -54,7 +54,36 @@ torchrun --master_port $MASTER_PORT --nproc_per_node=8 train.py \
 
 ### 1.b Annotate a (mostly) corrupted dataset with minimum noise levels $\sigma_{tn}$
 
-This can be done using the scripts in `scripts/annotate_noise_classifier`, with an example shown below for blurring corruptions with $\sigma_B=0.4$. Note that you will have to replace the `ckpt_name`, `annotated_datasets_path`, and `checkpoint_path` with your own.
+This can be done using the scripts in `scripts/annotate_noise_classifier` (if using a classifier) and `scripts/annotate_fixed_sigma` (if using a fixed annotation), with examples shown below for blurring corruptions with $\sigma_B=0.8$ and $\sigma_B=0.4$. Note that you will have to replace the `ckpt_name`, `annotated_datasets_path`, and `checkpoint_path` with your own.
+
+With fixed sigma
+```
+# blur0-8_fixed1-89.sh
+#!/bin/bash
+PYTHONPATH=.
+annotated_datasets_path=./outputs/annotated_cifar10/annotated_blur0-8_fixed_1-89/
+training_noise_config=blur0-8
+inference_noise_config=blur0-8
+corruption_probability=0.9
+min_sigma=1.89
+
+# Randomize torchrun master_port
+MASTER_PORT=$(( ( RANDOM % 1000 )  + 10000 ))
+
+export TORCH_NCCL_ENABLE_MONITORING=0
+# export NCCL_BLOCKING_WAIT=0
+export TORCH_NCCL_HEARTBEAT_TIMEOUT_SEC=72000
+
+torchrun --nproc_per_node=1 annotate_fixed_sigma.py \
+    --annotated_dataset_path=${annotated_datasets_path} \
+    --dataset_path=./data/cifar10/train \
+    --inference_noise_config=${inference_noise_config} \
+    --corruption_probability=${corruption_probability} \
+    --min_fixed_sigma=$min_sigma \
+    --max_fixed_sigma=0
+```
+
+With classifier
 ```
 # blur0-4_prob0-5_15k.sh
 #!/bin/bash
