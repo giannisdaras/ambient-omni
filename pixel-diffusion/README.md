@@ -1,9 +1,9 @@
 
 # Ambient Pixel Diffusion
 
-This part of the repo focuses on small-scale experiments with pixel diffusion using Cifar-10 and AFHQ. There are two things you can do here:
-1. Train a high-quality generative model for cifar-10 using mostly low-quality corrupted data
-2. Train a generative model for dogs utilising images of cats
+This part of the repo focuses on small-scale experiments pixel diffusion with [EDM](https://github.com/NVlabs/edm). There are two things you can do here:
+1. Train a generative model that leverages low-quality images (e.g. blurry images, JPEG compressed, etc)
+2. Train a generative model using out-of-distribution samples (e.g. a generative model for dogs that also uses images of cats)
 
 
 ## 1. Train a high-quality generative model for cifar-10 using mostly low-quality corrupted data
