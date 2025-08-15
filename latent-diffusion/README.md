@@ -14,7 +14,18 @@ Follow the [Preparing datasets](https://github.com/NVlabs/edm2#preparing-dataset
 
 ## 2. Calculate the quality of your data
 
-Just run `scripts/calculate_metrics_quality.sh` or use our annotations uploaded to [huggingface](https://huggingface.co/datasets/adrianrm/ambient-o-clip-iqa-patches-imagenet)
+Just run `scripts/calculate_metrics_quality.sh` or use our annotations uploaded to [huggingface](https://huggingface.co/datasets/adrianrm/ambient-o-clip-iqa-patches-imagenet). Our sample training scripts are already set-up to use the huggingface data, so you don't have to do anything. If you want to load them outside the trainign code for analysis, you can do so like this:
+
+```
+from huggingface_hub import hf_hub_download
+
+annotations_qualities_path = hf_hub_download(repo_id='adrianrm/ambient-o-clip-iqa-patches-imagenet', filename="clip_iqa_patch_average.safetensors", repo_type="dataset")
+annotations_qualities = {}
+with safe_open(annotations_qualities_path, framework="pt", device=dist.get_rank()) as f:
+    for k in f.keys():
+        annotations_qualities[k] = f.get_tensor(k)
+```
+
 
 ## 3. Train your diffusion model
 
