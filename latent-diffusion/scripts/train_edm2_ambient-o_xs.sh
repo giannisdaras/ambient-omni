@@ -8,7 +8,7 @@ model_name="edm2-img512-xs"
 dataset_path="datasets/img512-sd.zip"
 
 # Ambient config
-annotations_qualities_path="annotations/clip_iqa_patch_average_fast.pkl"
+annotations_qualities_path="adrianrm/ambient-o-clip-iqa-patches-imagenet" #"annotations/clip_iqa_patch_average.pkl"
 bad_data_percentage=0.9
 bad_data_sigma_min=0.2
 use_ambient_crops=False

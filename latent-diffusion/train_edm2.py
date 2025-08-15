@@ -20,6 +20,7 @@ import wandb
 import string
 import random
 import ambient_utils
+from huggingface_hub import hf_hub_download
 warnings.filterwarnings('ignore', 'You are using `torch.load` with `weights_only=False`')
 
 #----------------------------------------------------------------------------
@@ -223,7 +224,11 @@ def cmdline(outdir, dry_run, **opts):
     dist.print0('Setting up training config...')
     c = setup_training_config(**opts)
     # Ambient annotations options
-    c.annotations_qualities_path = opts['annotations_qualities_path']
+    if opts['annotations_qualities_path'] == "adrianrm/ambient-o-clip-iqa-patches-imagenet":
+        annotations_qualities_path = hf_hub_download(repo_id='adrianrm/ambient-o-clip-iqa-patches-imagenet', filename="clip_iqa_patch_average.pkl")
+        c.annotations_qualities_path =  annotations_qualities_path
+    else:
+        c.annotations_qualities_path = opts['annotations_qualities_path']
     c.bad_data_percentage = opts['bad_data_percentage']
     c.bad_data_sigma_min = opts['bad_data_sigma_min']
     c.use_ambient_crops = opts['use_ambient_crops']
