@@ -14,7 +14,7 @@ Follow the [Preparing datasets](https://github.com/NVlabs/edm2#preparing-dataset
 
 ## 2. Calculate the quality of your data
 
-Just run `scripts/calculate_metrics_quality.sh`
+Just run `scripts/calculate_metrics_quality.sh` or use our annotations uploaded to [huggingface](https://huggingface.co/datasets/adrianrm/ambient-o-clip-iqa-patches-imagenet)
 
 ## 3. Train your diffusion model
 
