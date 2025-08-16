@@ -5,7 +5,7 @@ This part of the repo focuses on large-scale text-to-image diffusion experiments
 
 ## Results
 This allows us to obtain much better generation quality without discarding data, as we can see the following figure:
-![Generated Images](figs/generations_tti.jpg)
+![Generated Images](../figs/generations_tti.jpg)
 
 ## Using our models
 You can generate your own images with the following snippet, which uses our ambient model on [huggingface](https://huggingface.co/giannisdaras/ambient-o)
