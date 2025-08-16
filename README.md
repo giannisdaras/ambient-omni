@@ -68,33 +68,46 @@ The pre-trained model is available on Hugging Face:
 To use it, you can run the following:
 
 ```python
-from micro_diffusion.models.model import create_latent_diffusion
 import torch
+from micro_diffusion.models.model import create_latent_diffusion
+from huggingface_hub import hf_hub_download
+from safetensors import safe_open
 
-
+# Init model
 params = {
     'latent_res': 64,
     'in_channels': 4,
     'pos_interp_scale': 2.0,
 }
 model = create_latent_diffusion(**params).to('cuda')
-checkpoint = torch.load(ckpt_path, map_location='cuda', weights_only=False)
-model_dict = checkpoint['state']['model']
-# Convert parameters to float32
+
+# Download weights from HF
+model_dict_path = hf_hub_download(repo_id="giannisdaras/ambient-o", filename="model.safetensors")
+model_dict = {}
+with safe_open(model_dict_path, framework="pt", device="cpu") as f:
+   for key in f.keys():
+       model_dict[key] = f.get_tensor(key)
+
+# Convert parameters to float32 + load
 float_model_params = {
-    k.replace('dit.', ''): v.to(torch.float32) for k, v in model_dict.items() if 'dit' in k
+    k: v.to(torch.float32) for k, v in model_dict.items()
 }
 model.dit.load_state_dict(float_model_params)
 
+# Eval mode
+model = model.eval()
+
+# Generate images
 prompts = [
     "Pirate ship trapped in a cosmic maelstrom nebula, rendered in cosmic beach whirlpool engine, volumet",
     "A illustration from a graphic novel. A bustling city street under the shine of a full moon.",
+    "A giant cobra snake made from corn",
+    "A fierce garden gnome warrior, clad in armor crafted from leaves and bark, brandishes a tiny sword.",
+    "A capybara made of lego sitting in a realistic, natural field",
+    "a close-up of a fire spitting dragon, cinematic shot.",
+    "Panda mad scientist mixing sparkling chemicals, artstation"
 ]
-
-model = model.eval()
-gen_images = model.generate(prompt=prompts, num_inference_steps=30, 
-                           guidance_scale=5.0, seed=42)
-
+images = model.generate(prompt=prompts, num_inference_steps=30, guidance_scale=5.0, seed=42)
 ```
 
 ## Learning in the high-noise regime
