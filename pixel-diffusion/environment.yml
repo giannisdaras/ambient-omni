@@ -25,3 +25,4 @@ dependencies:
     - diffusers
     - s3fs
     - seaborn
+    - huggingface-hub
