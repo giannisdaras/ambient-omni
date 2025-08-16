@@ -72,6 +72,7 @@ We provide scripts for generating images for the following benchmarks:
 - COCO-30K: `scripts/generate_coco.sh`
 - Drawbench: `scripts/generate_drawbench.sh`)
 - Partiprompts: `scripts/generate_parti.sh`
+
 The generation scripts use our [huggingface ambient checkpoint](https://huggingface.co/giannisdaras/ambient-o) by default, but you can change the path to your own models.
 
 We also provide scripts for evaluating:
