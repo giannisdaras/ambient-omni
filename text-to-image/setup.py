@@ -23,8 +23,8 @@ setup(
         'omegaconf', 
         'datasets', 
         'hydra-core',
-        'beautifulsoup4'
-        'git+https://github.com/giannisdaras/ambient_utils',
+        'beautifulsoup4',
+        'ambient-utils',
         'safetensors',
         'clean-fid'
     ],
