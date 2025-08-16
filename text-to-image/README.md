@@ -68,7 +68,17 @@ We provide scripts for training our ambient (`train_e2e_ambient.sh`) and baselin
 
 ## Evaluation
 
-We provide scripts for generating images for the COCO-30K (`scripts/generate_coco.sh`), drawbench (`scripts/generate_drawbench.sh`), and partiprompts (`scripts/generate_parti.sh`) benchmarks. We also provide scripts for evaluating FID (`scripts/eval_fid.sh`), CLIP-FD (`scripts/eval_clip-fd.sh`), CLIP alignment and quality (`scripts/eval_clip-align-and-quality.sh`), and GPT-4o (`scripts/eval_gpt4o.sh`) evaluations. The generation scripts use our [huggingface ambient checkpoint](https://huggingface.co/giannisdaras/ambient-o) by default, but you can change the path to your own models.
+We provide scripts for generating images for the following benchmarks:
+- COCO-30K: `scripts/generate_coco.sh`
+- drawbench: `scripts/generate_drawbench.sh`)
+- partiprompts: `scripts/generate_parti.sh`
+The generation scripts use our [huggingface ambient checkpoint](https://huggingface.co/giannisdaras/ambient-o) by default, but you can change the path to your own models.
+
+We also provide scripts for evaluating:
+- FID: `scripts/eval_fid.sh`
+- CLIP-FD: `scripts/eval_clip-fd.sh`
+- CLIP alignment and quality: `scripts/eval_clip-align-and-quality.sh`
+- GPT-4o evaluation: `scripts/eval_gpt4o.sh`
 
 # 🔗 Related Codebases
 
