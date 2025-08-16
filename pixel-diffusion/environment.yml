@@ -26,3 +26,4 @@ dependencies:
     - s3fs
     - seaborn
     - huggingface-hub
+    - safetensors

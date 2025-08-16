@@ -11,7 +11,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Note: huggingface_hub==0.26.5 fails as in https://github.com/easydiffusion/easydiffusion/issues/1851
-RUN pip install huggingface_hub==0.25.2 diffusers==0.26.3 accelerate==0.27.2 git+https://github.com/giannisdaras/ambient_utils
+RUN pip install huggingface_hub==0.25.2 diffusers==0.26.3 accelerate==0.27.2 git+https://github.com/giannisdaras/ambient_utils torchmetrics piq safetensors
 
 WORKDIR /workspace
 

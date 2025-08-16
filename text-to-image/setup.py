@@ -24,6 +24,8 @@ setup(
         'datasets', 
         'hydra-core',
         'beautifulsoup4'
-        'git+https://github.com/giannisdaras/ambient_utils'
+        'git+https://github.com/giannisdaras/ambient_utils',
+        'safetensors',
+        'clean-fid'
     ],
 )
