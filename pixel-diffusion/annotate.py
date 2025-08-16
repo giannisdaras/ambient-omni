@@ -18,32 +18,54 @@ import matplotlib.pyplot as plt
 from filelock import FileLock
 from tqdm import tqdm
 import datetime
+from safetensors import safe_open
+from safetensors.torch import save_file
+from huggingface_hub import hf_hub_download
+from safetensors.torch import load_file
 parser = argparse.ArgumentParser()
 parser.add_argument("--annotated_dataset_path", type=str, required=True, help="Path to save the annotated dataset.")
+parser.add_argument("--checkpoint_path", type=str, required=True, help="Checkpoint path.")
 parser.add_argument("--training_noise_config", type=str, default="blurs", help="Corruption configuration during the training of the classifier.")
 parser.add_argument("--inference_noise_config", type=str, default="blurs1", help="Corruption configuration for the inference of the classifier.")
 parser.add_argument("--dataset", type=str, default="cifar", help="Dataset name.")
 parser.add_argument("--seed", type=int, default=42, help="Random seed.")
 parser.add_argument("--batch_size", type=int, default=128, help="Batch size.")
 parser.add_argument("--num_trials_per_t", type=int, default=4, help="How many times to query the classifier for each t.")
+parser.add_argument("--num_sigmas", type=int, default=2048, help="How many sigmas for dense annotation")
 parser.add_argument("--corruption_probability", type=float, default=0.5, help="Corruption probability.")
 # TODO (@giannisdaras): update this path once we get a better one
-parser.add_argument("--checkpoint_path", type=str, 
-                    default="/scratch/07362/gdaras/cls_runs/00005-cifar10-32x32-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-cQrt8/network-snapshot-005018.pkl", 
-                    help="Checkpoint path.")
 parser.add_argument("--checkpoint_index", type=int, default=200_000, help="Checkpoint index.")
 
 def load_net_from_pkl(ckpt_file):
-    base_folder = os.path.dirname(ckpt_file)
-    with open(os.path.join(base_folder, "training_options.json"), "r", encoding="utf-8") as f:
-        options = json.load(f)
+    if ckpt_file.startswith('adrianrm/ambient-o'):
+        options_path = hf_hub_download(repo_id=ckpt_file, filename="training_options.json")
+        options = json.load(open(options_path, "r", encoding="utf-8"))
 
-    interface_kwargs = dict(img_resolution=options['dataset_kwargs']['resolution'], img_channels=3, label_dim=0)
-    
-    net = dnnlib.util.construct_class_by_name(**options['network_kwargs'], **interface_kwargs)
-    with dnnlib.util.open_url(ckpt_file) as f:
-        data = pickle.load(f)
-    copy_params_and_buffers(src_module=data['ema'], dst_module=net, require_all=False)
+        interface_kwargs_path = hf_hub_download(repo_id=ckpt_file, filename="interface_kwargs.json")
+        interface_kwargs = json.load(open(interface_kwargs_path, "r", encoding="utf-8"))
+
+        net = dnnlib.util.construct_class_by_name(**options['network_kwargs'], **interface_kwargs)
+
+        state_dict_path = hf_hub_download(repo_id=ckpt_file, filename="ema.safetensors")
+        state_dict = load_file(state_dict_path)
+        net.load_state_dict(state_dict)
+        net.eval()
+
+        assert_msg = f"""
+        HuggingFace checkpoint expects data in ./data/cifar10/train; if your data is in a different path, please create symlink or edit options["dataset_kwargs"]["path"] here.
+        """
+        assert os.path.exists('./data/cifar10/train'), assert_msg
+    else:
+        base_folder = os.path.dirname(ckpt_file)
+        with open(os.path.join(base_folder, "training_options.json"), "r", encoding="utf-8") as f:
+            options = json.load(f)
+
+        interface_kwargs = dict(img_resolution=options['dataset_kwargs']['resolution'], img_channels=3, label_dim=0)
+        
+        net = dnnlib.util.construct_class_by_name(**options['network_kwargs'], **interface_kwargs)
+        with dnnlib.util.open_url(ckpt_file) as f:
+            data = pickle.load(f)
+        copy_params_and_buffers(src_module=data['ema'], dst_module=net, require_all=False)
     return net, options
 
 
@@ -85,7 +107,7 @@ def main(args):
             )
 
     # rnd_normal = torch.randn([4096, 1, 1, 1], device="cuda", generator=torch.Generator(device="cuda").manual_seed(42))  # it is very important to set this seed to have consistency with the seed used during training.
-    rnd_normal = torch.randn([2048, 1, 1, 1], device="cuda", generator=torch.Generator(device="cuda").manual_seed(42))  # it is very important to set this seed to have consistency with the seed used during training.
+    rnd_normal = torch.randn([args.num_sigmas, 1, 1, 1], device="cuda", generator=torch.Generator(device="cuda").manual_seed(42))  # it is very important to set this seed to have consistency with the seed used during training.
     sigmas, _ = (rnd_normal * 1.2 - 1.2).exp().sort(dim=0)
     sigmas = sigmas.squeeze()
 
