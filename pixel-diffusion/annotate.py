@@ -48,6 +48,8 @@ def load_net_from_pkl(ckpt_file):
         net.load_state_dict(state_dict)
         net.eval()
 
+        # options["dataset_kwargs"]["path"] = your cifar10 path
+
         assert_msg = f"""
         HuggingFace checkpoint expects data in ./data/cifar10/train; if your data is in a different path, please create symlink or edit options["dataset_kwargs"]["path"] here.
         """
