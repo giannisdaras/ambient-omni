@@ -3,7 +3,7 @@
 
 This part of the repo focuses on large-scale text-to-image diffusion experiments with [Micro-Diffusion](https://github.com/SonyResearch/micro_diffusion) using Conceptual Captions, Segment Anything-1B, TextCaps, JourneyDB, and DiffusionDB. Here, we show how just by using the data better, you can improve the performance and quality of your generative models. Everything else, including data, model size, and training FLOPs, stays the exact same. The key idea is to change the diffusion times we use for our images depending on quality: high-quality data is used for all times, while low-quality data is used only for times above a certain threshold.
 
-You can find our best model from the paper on [huggingface](https://huggingface.co/giannisdaras/ambient-o), and if you want to train your own, only three things are required:
+You can find our best model from the paper on [huggingface](https://huggingface.co/giannisdaras/ambient-o), and if you want to train your own, only two things are required:
 1. Prepare your environment and data following the instructions in the Micro-Diffusion repo
 2. Train your generative model using the ambient-o algorithm.
 
