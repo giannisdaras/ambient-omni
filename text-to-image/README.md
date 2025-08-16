@@ -70,8 +70,8 @@ We provide scripts for training our ambient (`train_e2e_ambient.sh`) and baselin
 
 We provide scripts for generating images for the following benchmarks:
 - COCO-30K: `scripts/generate_coco.sh`
-- drawbench: `scripts/generate_drawbench.sh`)
-- partiprompts: `scripts/generate_parti.sh`
+- Drawbench: `scripts/generate_drawbench.sh`)
+- Partiprompts: `scripts/generate_parti.sh`
 The generation scripts use our [huggingface ambient checkpoint](https://huggingface.co/giannisdaras/ambient-o) by default, but you can change the path to your own models.
 
 We also provide scripts for evaluating:
