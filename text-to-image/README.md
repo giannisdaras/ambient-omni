@@ -1,43 +1,27 @@
 
-# Ambient + Latent Diffusion w/ EDM2
+# Ambient + Text-to-Image Diffusion w/ Micro-Diffusion
 
-This part of the repo focuses on large-scale latent diffusion experiments with [EDM2](https://github.com/NVlabs/edm2) using ImageNet. Here, we show how just by using the data better, you can improve the performance and quality of your generative models. Everything else, including data, model size, and training FLOPs, stays the exact same. The key idea is to change the diffusion times we use for our images depending on quality: high-quality data is used for all times, while low-quality data is used only for times above a certain threshold.
+This part of the repo focuses on large-scale text-to-image diffusion experiments with [Micro-Diffusion](https://github.com/SonyResearch/micro_diffusion) using Conceptual Captions, Segment Anything-1B, TextCaps, JourneyDB, and DiffusionDB. Here, we show how just by using the data better, you can improve the performance and quality of your generative models. Everything else, including data, model size, and training FLOPs, stays the exact same. The key idea is to change the diffusion times we use for our images depending on quality: high-quality data is used for all times, while low-quality data is used only for times above a certain threshold.
 
-You can find our best model from the paper on [huggingface](https://huggingface.co/giannisdaras/ambient-o-imagenet512-xxl-with-crops), and if you want to train your own, only three things are required:
-1. Prepare your ImageNet data in the EMD2 format
-2. Calculate the quality of your data. In this repo, we use CLIP-IQA, but any metric could work.
-3. Train your generative model using the ambient-o algorithm.
+You can find our best model from the paper on [huggingface](https://huggingface.co/giannisdaras/ambient-o), and if you want to train your own, only three things are required:
+1. Prepare your environment and data following the instructions in the Micro-Diffusion repo
+2. Train your generative model using the ambient-o algorithm.
 
-## 1. Prepare your data in the EMD2 format
+## 1. Prepare your environment and data in the Micro-Diffusion format
 
-Follow the [Preparing datasets](https://github.com/NVlabs/edm2#preparing-datasets) section in the original EDM-2 repository.
+Follow the instructions in the original [Micro-Diffusion](https://github.com/SonyResearch/micro_diffusion) repository (but using our edited version of their code).
 
-## 2. Calculate the quality of your data
+## 2. Train your diffusion model
 
-Just run `scripts/calculate_metrics_quality.sh` or use our annotations uploaded to [huggingface](https://huggingface.co/datasets/adrianrm/ambient-o-clip-iqa-patches-imagenet). Our sample training scripts are already set-up to use the huggingface data, so you don't have to do anything. If you want to load them outside the trainign code for analysis, you can do so like this:
-
-```
-from huggingface_hub import hf_hub_download
-
-annotations_qualities_path = hf_hub_download(repo_id='adrianrm/ambient-o-clip-iqa-patches-imagenet', filename="clip_iqa_patch_average.safetensors", repo_type="dataset")
-annotations_qualities = {}
-with safe_open(annotations_qualities_path, framework="pt", device=dist.get_rank()) as f:
-    for k in f.keys():
-        annotations_qualities[k] = f.get_tensor(k)
-```
-
-
-## 3. Train your diffusion model
-
-We provide scripts for training our XXL ambient models with crops (`scripts/train_edm2_ambient-o_xxl.sh`) and without crops (`scripts/train_edm2_ambient-o_crops_xxl.sh`). While the scripts are set up to run on a single 8 GPU node for simplicity, we suggest following the original EDM2 recommendation of running it on at least 4 such nodes (32 GPUs total).
+We provide scripts for training our ambient (`train_e2e_ambient.sh`) and baseline models (`train_e2e_baseline.sh`).
 
 ## Evaluation
 
-We provide scripts for evaluating our strongest model, published on huggingface, in the scripts `scripts/eval_edm2_ambient-o_crops_xxl_dino_FD.sh` and `scripts/eval_edm2_ambient-o_crops_xxl_FID.sh`. They can easily be adapted to your own models by replacing the `experiment_dir` variable to your own experiment directory, uncommenting the part of the code that generates the post-hoc EMAs, and setting the value of `net` to the EMA path instead of our huggingface repo. For any doubts, refer to the original EDM2 repository.
+We provide scripts for generating images for the COCO-30K (`scripts/generate_coco.sh`), drawbench (`scripts/generate_drawbench.sh`), and partiprompts (`scripts/generate_parti.sh`) benchmarks. We also provide scripts for evaluating FID (`scripts/eval_fid.sh`), CLIP-FD (`scripts/eval_clip-fd.sh`), CLIP alignment and quality (`scripts/eval_clip-align-and-quality.sh`), and GPT-4o (`scripts/eval_gpt4o.sh`) evaluations. The generation scripts use our [huggingface ambient checkpoint](https://huggingface.co/giannisdaras/ambient-o) by default, but you can change the path to your own models.
 
 # 🔗 Related Codebases
 
-* [EDM2](https://github.com/NVlabs/edm2): starting point for this repository.
+* [Micro-Diffusion](https://github.com/SonyResearch/micro_diffusion): starting point for this repository.
 * [Ambient utils](https://github.com/giannisdaras/ambient-utils): helper functions for training diffusion models (or flow matching models) in settings with limited access to high-quality data.
 * [Ambient Laws](https://github.com/giannisdaras/ambient-laws): trains models with a mix of clean and noisy data.
 * [Ambient Diffusion](https://github.com/giannisdaras/ambient-diffusion): trains models for linear corruptions.
