@@ -10,10 +10,6 @@
 </div>
 
 
-🚧 **<span style="color:rgb(204, 41, 0);">We are currently preparing the code for the full release. Stay tuned! </span>** 🚧
-
-
-
 This repository hosts the official PyTorch implementation of the paper: [Ambient Diffusion Omni: Training Good Models with Bad Data](https://arxiv.org/abs/2506.10038)
 
 
