@@ -1,6 +1,3 @@
-"""
-python annotate.py --annotated_dataset_path=/scratch/07362/gdaras/datasets/cifar10-32x32_blurred/
-"""
 import argparse
 from ambient_utils import save_image
 from ambient_utils import dist_utils

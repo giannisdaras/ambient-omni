@@ -34,7 +34,7 @@ for iter_num in "${iters_list[@]}"; do
 
   # # FD DINOv2
   # cd ../edm2
-  # output=$(python calculate_metrics.py calc --images=$eval_path --ref=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/data_softlink/annotated_cifar10_uncorrupted/refs.pkl)
+  # output=$(python calculate_metrics.py calc --images=$eval_path --ref=./data/annotated_cifar10_uncorrupted/refs.pkl)
   # echo "Dataset=cifar, Checkpoint=$ckpt_path, Calc=$output"
   # echo "Dataset=cifar, Checkpoint=$ckpt_path, Calc=$output" >> $eval_path/eval_fd_dino.txt
   # cd ../pixel-diffusion

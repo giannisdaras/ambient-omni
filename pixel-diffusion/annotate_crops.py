@@ -1,10 +1,10 @@
 """
 python annotate_crops.py \
-    --annotated_dataset_path=/scratch/07362/gdaras/datasets/afhq-dogs-help/ \
-    --dataset_path=/scratch/07362/gdaras/datasets/afhqv2-64x64-partitioned/1/ \
+    --annotated_dataset_path=./outputs/annotated_afhq/afhq-dogs-help/ \
+    --dataset_path=./data/afhqv2-64x64-partitioned/1/ \
     --corruption_probability=0.9 \
     --flip_probs \
-    --checkpoint_paths=/scratch/07362/gdaras/ambient-syn-runs/00039-afhqv2-64x64-partitioned-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-SIPct/network-snapshot-020070.pkl,/scratch/07362/gdaras/ambient-syn-runs/00037-afhqv2-64x64-partitioned-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-uoJee/network-snapshot-020070.pkl,/scratch/07362/gdaras/ambient-syn-runs/00040-afhqv2-64x64-partitioned-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-DtoBD/network-snapshot-020070.pkl
+    --checkpoint_paths=./outputs/ambient-syn-runs/00039-afhqv2-64x64-partitioned-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-SIPct/network-snapshot-020070.pkl,./outputs/ambient-syn-runs/00037-afhqv2-64x64-partitioned-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-uoJee/network-snapshot-020070.pkl,./outputs/ambient-syn-runs/00040-afhqv2-64x64-partitioned-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-DtoBD/network-snapshot-020070.pkl
 """
 import argparse
 import numpy as np

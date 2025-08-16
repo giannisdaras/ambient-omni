@@ -25,7 +25,7 @@ Training a classifier is the most principled way of using our method, and leads 
 #!/bin/bash
 PYTHONPATH=.
 outdir=./outputs
-dataset_path=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/data_softlink/cifar10/train # Replace with your own
+dataset_path=./data/cifar10/train # Replace with your own
 noise_config=blur0-4
 corruption_probability=0.5
 precond=edmcls
@@ -161,7 +161,7 @@ This can be done using the scripts in `scripts/eval_low_quality_data_diffusion`,
 # eval_blur0-4_prob0-5_iter15k.sh
 #!/bin/bash
 PYTHONPATH=.
-dataset_path=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/data_softlink/cifar10/train # Replace with your own; path to clean cifar10
+dataset_path=./data/train # Replace with your own; path to clean cifar10
 # Replace with your own
 ckpt_dir=noise_classifier/blur0-4_prob0-5/00004-train-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-V5gDx/network-snapshot-015053/s-max-4/00000-network-snapshot-015053-uncond-ddpmpp-edm-gpus8-batch512-fp32-DusSj
 dp=1.0
@@ -210,8 +210,8 @@ To do this, there are five steps you must follow:
 This can be done using the script `scripts/ood_dataset_utils/merge_cats_and_dogs_for_crops_classifier.sh`. Note that you will have to replace both `cats_dataset_path` and the `dogs_dataset_path` with your own
 ```
 # merge_cats_and_dogs_for_crops_classifier.sh
-cats_dataset_path=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/scratch_ambient/ambient/datasets/afhqv2-64x64-partitioned/0 # cats, replace with your own
-dogs_dataset_path=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/scratch_ambient/ambient/datasets/afhqv2-64x64-partitioned/1 # dogs, replace with your own
+cats_dataset_path=./data/afhqv2-64x64-partitioned/0 # cats, replace with your own
+dogs_dataset_path=./data/afhqv2-64x64-partitioned/1 # dogs, replace with your own
 ./scripts/ood_dataset_utils/merge_datasets_for_train_crops_classifier.sh ./data/cats-100_and_dogs-100 $cats_dataset_path $dogs_dataset_path
 ```
 
@@ -330,7 +330,7 @@ This can be done using the scripts in `scripts/eval_ood_diffusion` with an examp
 # eval_half_cats_help_dogs_iter15k.sh
 #!/bin/bash
 PYTHONPATH=.
-dogs_dataset_path=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/scratch_ambient/ambient/datasets/afhqv2-64x64-partitioned/1
+dogs_dataset_path=./data/afhqv2-64x64-partitioned/1
 ckpt_dir=cats-100_and_dogs-100/network-snapshot-020070/s-max-4/00009-network-snapshot-020070-uncond-ddpmpp-edm-gpus8-batch512-fp32-FtdC1
 dp=1.0
 weight_decay=0.0
@@ -364,7 +364,7 @@ for iter_num in "${iters_list[@]}"; do
 
   # # FD DINOv2
   # cd ../edm2
-  # output=$(python calculate_metrics.py calc --images=$eval_path --ref=/data/vision/torralba/selfmanaged/torralba/projects/adrianr/ambient/data_softlink/annotated_cifar10_uncorrupted/refs.pkl)
+  # output=$(python calculate_metrics.py calc --images=$eval_path --ref=./data/annotated_cifar10_uncorrupted/refs.pkl)
   # echo "Dataset=cifar, Checkpoint=$ckpt_path, Calc=$output"
   # echo "Dataset=cifar, Checkpoint=$ckpt_path, Calc=$output" >> $eval_path/eval_fd_dino.txt
   # cd ../pixel-diffusion
