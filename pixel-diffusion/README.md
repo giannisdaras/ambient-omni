@@ -111,7 +111,7 @@ torchrun --nproc_per_node=8 annotate.py \
     --checkpoint_path=${checkpoint_path}
 ```
 
-With our huggingface checkpoint. Using our checkpoint requires the cifar10 data to be in `./data/cifar10/train`, or that you add a line changing the `dataset_kwargs` in line 51 of `annotate.py. 
+With our huggingface checkpoint. Using our checkpoint requires the cifar10 data to be in `./data/cifar10/train`, or that you add a line changing the `dataset_kwargs` in line 51 of `annotate.py`. 
 ```
 #!/bin/bash
 PYTHONPATH=.
