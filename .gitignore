@@ -17,7 +17,13 @@ pixel-diffusion/ambient-syn-evals
 pixel-diffusion/ambient-syn-runs
 data_softlink
 
-# edm2
-edm2/scratch
-edm2/scratch_release
-edm2/slurm
+# latent-diffusion
+latent-diffusion/outputs
+
+# text-to-image
+text-to-image/datadir/sa1b
+text-to-image/datadir/cc12m
+text-to-image/datadir/textcaps
+text-to-image/datadir/jdb
+text-to-image/datadir/diffdb
+text-to-image/outputs
