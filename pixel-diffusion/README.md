@@ -57,7 +57,7 @@ torchrun --master_port $MASTER_PORT --nproc_per_node=8 train.py \
 This can be done using the scripts in `scripts/annotate_noise_classifier` (if using a classifier) and `scripts/annotate_fixed_sigma` (if using a fixed annotation), with examples shown below for blurring corruptions with $\sigma_B=0.8$ and $\sigma_B=0.4$. Note that you will have to replace the `ckpt_name`, `annotated_datasets_path`, and `checkpoint_path` with your own. We have also uploaded a classifier checkpoint to [huggingface](https://huggingface.co/adrianrm/ambient-o-noise-classifier-blur06-prob05-iter15k) for blurring corruptions with $\sigma_B=0.6$, to help sanity check any experiments (our checkpoint requires the cifar10 data to be in `./data/cifar10/train`).
 
 With fixed sigma
-```
+```bash
 # blur0-8_fixed1-89.sh
 #!/bin/bash
 PYTHONPATH=.
@@ -84,7 +84,7 @@ torchrun --nproc_per_node=1 annotate_fixed_sigma.py \
 ```
 
 With your own classifier
-```
+```bash
 # blur0-4_prob0-5_15k.sh
 #!/bin/bash
 PYTHONPATH=.
@@ -112,7 +112,7 @@ torchrun --nproc_per_node=8 annotate.py \
 ```
 
 With our huggingface checkpoint. Using our checkpoint requires the cifar10 data to be in `./data/cifar10/train`, or that you add a line changing the `dataset_kwargs` in line 51 of `annotate.py`. 
-```
+```bash
 #!/bin/bash
 PYTHONPATH=.
 ckpt_name=noise_classifier/blur0-6_prob0-5/00000-train-uncond-ddpmpp-edmcls-gpus8-batch512-fp32-TWeeb/network-snapshot-015053 # Replace with your own
@@ -143,7 +143,7 @@ torchrun --nproc_per_node=7 annotate.py \
 
 This can be done using the scripts in `scripts/train_low_quality_data_diffusion`, with an example shown below for blurring corruptions with $\sigma_B=0.4$. Note that you will have to replace the `dataset_path` to the annotated dataset from 2.b for your own.
 
-```
+```bash
 # train_blur0-4_prob0-5_iter15k.sh
 #!/bin/bash
 PYTHONPATH=.
@@ -185,7 +185,7 @@ torchrun --master_port $MASTER_PORT --nproc_per_node=8 train.py \
 
 This can be done using the scripts in `scripts/eval_low_quality_data_diffusion`, with an example shown below for blurring corruptions with $\sigma_B=0.4$. Note that you will have to replace the `dataset_path` to the clean cifar10 and the `ckpt_dir` of your trained generative model from 1.c.
 
-```
+```bash
 # eval_blur0-4_prob0-5_iter15k.sh
 #!/bin/bash
 PYTHONPATH=.
@@ -236,7 +236,7 @@ To do this, there are five steps you must follow:
 
 ### 2.a Merge the datasets of cats and dogs into one folder
 This can be done using the script `scripts/ood_dataset_utils/merge_cats_and_dogs_for_crops_classifier.sh`. Note that you will have to replace both `cats_dataset_path` and the `dogs_dataset_path` with your own
-```
+```bash
 # merge_cats_and_dogs_for_crops_classifier.sh
 cats_dataset_path=./data/afhqv2-64x64-partitioned/0 # cats, replace with your own
 dogs_dataset_path=./data/afhqv2-64x64-partitioned/1 # dogs, replace with your own
@@ -246,7 +246,7 @@ dogs_dataset_path=./data/afhqv2-64x64-partitioned/1 # dogs, replace with your ow
 ### 2.b Train a crops classifier to distinguish crops from dog and cat images
 
 This can be done using the scripts in `scripts/train_crops_classifier` with an example shown below for cats and dogs. Note that you will have to run all crop size (4, 8, 16, 24), not just one of them.
-```
+```bash
 # dogs_and_cats_4.sh
 #!/bin/bash
 PYTHONPATH=.
@@ -282,7 +282,7 @@ torchrun --master_port $MASTER_PORT --nproc_per_node=8 train.py \
 ### 2.c Annotate a (mostly) out-of-distribution dataset with maximum crop size
 
 This can be done using the scripts in `scripts/annotate_crops_classifier` with an example shown below. Note that you will have to replace `cats_dataset_path`, `dogs_dataset_path`, `checkpoint_path_4`, `checkpoint_path_8`, `checkpoint_path_16`, and `checkpoint_path_24` with your own.
-```
+```bash
 # annotate_crops_cat_is_dog_20k.sh
 #!/bin/bash
 PYTHONPATH=.
@@ -319,7 +319,7 @@ merged_dataset_path=./outputs/annotated_afhq/cats_help_dogs/${checkpoint_basenam
 ### 2.d Train a generative model for dogs utilising images of cats
 
 This can be done using the scripts in `scripts/train_ood_diffusion` with an example shown below. Note that you will have to replace the `dataset_path` to the annotated dataset with your own.
-```
+```bash
 # train_cats_help_dogs_iter20k.sh
 #!/bin/bash
 PYTHONPATH=.
@@ -354,7 +354,7 @@ torchrun --master_port $MASTER_PORT --nproc_per_node=8 train.py \
 ### 2.e Evaluate the generative model
 
 This can be done using the scripts in `scripts/eval_ood_diffusion` with an example shown below. Note that you will have to replace the `ckpt_dir` to the annotated dataset with your own.
-```
+```bash
 # eval_half_cats_help_dogs_iter15k.sh
 #!/bin/bash
 PYTHONPATH=.
