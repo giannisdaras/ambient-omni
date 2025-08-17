@@ -17,7 +17,7 @@ setup(
         'einops',
         'mosaicml-streaming',
         'torchmetrics',
-        'mosaicml[tensorboard, wandb]',
+        'mosaicml',
         'tqdm',
         'pandas',
         'fastparquet',
