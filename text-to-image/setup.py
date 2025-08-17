@@ -2,7 +2,8 @@ from setuptools import setup
 
 setup(
     name="micro_diffusion",
-    py_modules=["micro_diffusion"],
+    packages=find_packages(),
+    include_package_data=True,
     install_requires=[
         'accelerate',
         'diffusers',
