@@ -16,7 +16,7 @@ Follow the [Preparing datasets](https://github.com/NVlabs/edm2#preparing-dataset
 
 Just run `scripts/calculate_metrics_quality.sh` or use our annotations uploaded to [huggingface](https://huggingface.co/datasets/adrianrm/ambient-o-clip-iqa-patches-imagenet). Our sample training scripts are already set-up to use the huggingface data, so you don't have to do anything. If you want to load them outside the trainign code for analysis, you can do so like this:
 
-```
+```python
 from huggingface_hub import hf_hub_download
 
 annotations_qualities_path = hf_hub_download(repo_id='adrianrm/ambient-o-clip-iqa-patches-imagenet', filename="clip_iqa_patch_average.safetensors", repo_type="dataset")
