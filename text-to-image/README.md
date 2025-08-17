@@ -9,7 +9,7 @@ This allows us to obtain much better generation quality without discarding data,
 
 ## Using our models
 You can generate your own images with the following snippet, which uses our ambient model on [huggingface](https://huggingface.co/giannisdaras/ambient-o)
-```
+```python
 import torch
 from micro_diffusion.models.model import create_latent_diffusion
 from huggingface_hub import hf_hub_download
