@@ -1,5 +1,8 @@
 
 # Ambient + Text-to-Image Diffusion w/ Micro-Diffusion
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/giannisdaras/ambient-o-text2image)
+[![Hugging Face Model](https://img.shields.io/badge/🤗%20Hugging%20Face-Model-orange)](https://huggingface.co/giannisdaras/ambient-o)
+[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
 
 This part of the repo focuses on large-scale text-to-image diffusion experiments with [Micro-Diffusion](https://github.com/SonyResearch/micro_diffusion) using Conceptual Captions, Segment Anything-1B, TextCaps, JourneyDB, and DiffusionDB. Here, we show how just by using the data better, you can improve the performance and quality of your generative models. Everything else, including data, model size, and training FLOPs, stays the exact same. The key idea is to change the diffusion times we use for our images depending on quality: high-quality data is used for all times, while low-quality data is used only for times above a certain threshold.
 
