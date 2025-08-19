@@ -4,6 +4,10 @@
 
 # Ambient Diffusion Omni (Ambient-o) 
 
+[![Hugging Face Spaces](https://img.shields.io/badge/🤗%20Hugging%20Face-Spaces-blue)](https://huggingface.co/spaces/giannisdaras/ambient-o-text2image)
+[![Hugging Face Model](https://img.shields.io/badge/🤗%20Hugging%20Face-Model-orange)](https://huggingface.co/giannisdaras/ambient-o)
+[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white)](https://pytorch.org/)
+
 
 <div align="center">
   <img src="figs/ambient_logo.png" width="60%" alt="Ambient Omni Logo" />
@@ -11,7 +15,6 @@
 
 
 This repository hosts the official PyTorch implementation of the paper: [Ambient Diffusion Omni: Training Good Models with Bad Data](https://arxiv.org/abs/2506.10038)
-
 
 Authored by: Giannis Daras*, Adrian Rodriguez-Munoz*, Adam Klivans, Antonio Torralba, Constantinos Daskalakis
 
@@ -24,13 +27,14 @@ Authored by: Giannis Daras*, Adrian Rodriguez-Munoz*, Adam Klivans, Antonio Torr
 
 
 
-
 ## Results
 
 
 ![Generated Images](figs/generations.png)
 
 Our model increases the quality of the generations without any changes in the architecture, training/sampling hyperparameters or the optimization algorithm. The benefit comes solely from using cleverly the available data.
+
+👉 Try it out on [Hugging Face Spaces](https://huggingface.co/spaces/giannisdaras/ambient-o-text2image): an interactive demo of the Ambient-o text-to-image model.
 
 
 ### ImageNet FID results
