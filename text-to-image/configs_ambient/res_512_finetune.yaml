@@ -33,10 +33,40 @@ dataset:
   train:
     _target_: micro_diffusion.datasets.ambient_loader.build_streaming_latents_dataloader
     datadir: 
+exp_name: AmbientDiTXL_mask_75_res_256_pretrain
+seed: 18
+algorithms:
+  low_precision_layernorm:
+   precision: amp_bf16
+  gradient_clipping:
+    clipping_type: norm
+    clip_norm: 0.25
+model:
+  _target_: micro_diffusion.models.model_ambient.create_ambient_diffusion
+  vae_name: stabilityai/stable-diffusion-xl-base-1.0
+  text_encoder_name: openclip:hf-hub:apple/DFN5B-CLIP-ViT-H-14-378
+  dit_arch: MicroDiT_XL_2
+  precomputed_latents: true
+  in_channels: 4
+  pos_interp_scale: 1.0
+  dtype: 'bfloat16'
+  latent_res: 32
+  p_mean: -0.6
+  p_std: 1.2
+  train_mask_ratio: 0.75
+dataset:
+  image_size: 256 # 8 * latent_res
+  train_batch_size: 2048
+  eval_batch_size: 1024
+  cap_drop_prob: 0.1
+  train:
+    _target_: micro_diffusion.datasets.ambient_loader.build_streaming_latents_dataloader
+    datadir: 
       - ./datadir/sa1b/mds_latents_sdxl1_dfnclipH14/
-      - ./datadir/cc12m/mds_minres512_latents_sdxl1_dfnclipH14/
+      - ./datadir/datasets/cc12m/mds_latents_sdxl1_dfnclipH14/
       - ./datadir/textcaps/mds_latents_sdxl1_dfnclipH14/
       - ./datadir/jdb/mds_latents_sdxl1_dfnclipH14/train/
+      - ./datadir/diffdb/mds_latents_sdxl1_dfnclipH14/
     drop_last: true
     shuffle: true
     prefetch_factor: 2
